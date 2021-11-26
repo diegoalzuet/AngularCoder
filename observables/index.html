@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.4.0/rxjs.umd.min.js"
+        integrity="sha512-+44c+4RaNWpQRmhz2dwqH+t6caPi46MTcLaQr96rnvXOOW7SInBN4ivxSIZyqGlLSUOw5UQ+ndUmN417dJPXNA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <h1>Hola</h1>
+    <button class="button-js">CLICK JS</button>
+    <button class="button-rxjs">CLICK RXJS</button>
+    <button class="button-another">Agregar otro subscriptor</button>
+
+    <button class="button-emit">EMITIR VALOR DEL SUBJECT</button>
+    <button class="button-subscribe">Me subscribo al subject</button>
+    <button class="button-unsubscribe">Me desubscribo al subject</button>
+
+    <button class="button-pipe">Me subscribo con PIPE</button>
+
+
+</body>
+
+<script>
+
+    const subject$ = new rxjs.Subject();
+
+    const buttonEmitir = document.querySelector('.button-emit');
+    buttonEmitir.addEventListener('click', () => {
+        subject$.next(`Nuevo valor: ${Math.random()}`);
+    })
+
+    let subscription;
+    const buttonSubscribir = document.querySelector('.button-subscribe');
+    buttonSubscribir.addEventListener('click', () => {
+
+        subscription = subject$.subscribe(data => console.log(data));
+    })
+
+    const buttonPipe = document.querySelector('.button-pipe');
+    buttonPipe.addEventListener('click', () => {
+        subscription = subject$.pipe(
+            rxjs.filter(data => data.includes('1') && data.includes('1')),
+            rxjs.map(data => data.toUpperCase()))
+            .subscribe(data => console.log(data));
+    })
+
+
+    const buttonUnsubscribir = document.querySelector('.button-unsubscribe');
+    buttonUnsubscribir.addEventListener('click', () => {
+        subscription.unsubscribe();
+    })
+
+
+
+
+    const button = document.querySelector('.button-js');
+    button.addEventListener('click', () => {
+        console.log('Click');
+    })
+
+    const buttonRxjs = document.querySelector('.button-rxjs');
+    // Obtengo un observable
+    const obsButton$ = rxjs.fromEvent(buttonRxjs, 'click');
+    //suscripcion
+    obsButton$.subscribe(() => {
+        console.log('Click RXJS');
+    })
+
+    const buttonAnother = document.querySelector('.button-another');
+    buttonAnother.addEventListener('click', () => {
+        obsButton$.subscribe(() => {
+            console.log('Click RXJS From Another');
+        })
+    })
+
+    //PULL
+    const array = [1, 2, 3, 4, 5];
+    for (let i = 0; i < array.length; i++) {
+        console.log(array[i]);
+    }
+    //PUSH
+    array.forEach(elemento => {
+        console.log(elemento);
+    })
+
+    //PUSH CON OBSERVABLE
+    const obsArray$ = rxjs.from(array);
+    obsArray$.subscribe(elemento => {
+        console.log(elemento);
+    })
+
+    const obs$ = new rxjs.Observable((observer) => {
+        observer.next(Math.random());
+        observer.next('Second value emmited');
+    });
+
+    obs$.subscribe(value => console.log(value));
+
+</script>
+
+</html>
