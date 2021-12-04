@@ -1,0 +1,33 @@
+<!-- <h1 [ngClass]="{'dark-mode': true}">Hola mundo desde angular</h1>
+<h1 [ngClass]=titleClass>Hola mundo desde angular</h1>
+<h1 [class.dark-mode]="estado">Hola mundo desde angular</h1>
+<h2>{{title}}</h2>
+<h3>{{createTitle()}}</h3>
+
+<button class="btn btn-primary" (click)="cambiarTitulo()">Cambiar Titulo</button>
+<button class="btn btn-primary" (click)="cambiarClase()">Cambiar Clase</button>
+<button class="btn btn-primary" (click)="agregarBorde()">AgregarBorde</button>
+<button class="btn btn-primary" (click)="activarDarkMode()">ActivarDarkMode</button>
+<app-hola-mundo></app-hola-mundo> -->
+<h1>Empleados</h1>
+
+<div class="empleado" *ngFor="let empleado of empleados">
+  <div class="nombre">{{empleado.nombre}}</div>
+  <div class="puesto">{{empleado.puesto}}</div>
+  <div class="team" *ngIf="empleado.team!==''">Team: {{empleado.team}}</div>
+  <div class="foto" *ngIf="empleado.foto!==''"><img src={{empleado.foto}} alt=""></div>
+  <br>
+</div>
+
+<h2>Agregar Empleado</h2>
+<div class="input-group mb-3">
+  <input #nombre type="text" class="form-control">
+</div>
+<button class="btn btn-primary" (click)='agregarEmpleado(nombre.value)'>Agregar Empleado</button>
+
+<!-- SIN PIPE -->
+{{empleados}}
+<!-- PIPE -->
+{{empleados|json}}
+
+{{12.3|currency:'EUR'}}

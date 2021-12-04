@@ -1,0 +1,25 @@
+h1{
+  font-family: 'Courier New', Courier, monospace;
+
+}
+app-hola-mundo{
+  display: block;
+  margin: 50px;
+}
+
+.dark-mode{
+  color: white;
+  background-color: black;
+}
+.light-mode{
+  color: black;
+  background-color: white;
+}
+.rounded-border{
+  padding: 16px;
+  border: 2px solid red;
+  border-radius: 10px;
+}
+button{
+  margin: 2px;
+}
