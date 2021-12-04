@@ -1,1 +1,18 @@
-<p>reactive-form works!</p>
+<h1>Login</h1>
+<form [formGroup]="usuarioRegistradoForm" class="m-3 col-lg-6">
+  <div class="form-group">
+    <input type="text" id="user" name="user" placeholder="user" formControlName="user">
+  </div>
+  <div class="form-group">
+    <input type="password" id="password" name="password" placeholder="password" formControlName="password">
+  </div>
+  <div *ngIf="userControl.invalid && (userControl.dirty || userControl.touched)" class="alert alert-danger">
+    <div *ngIf="userControl.hasError('required')">El nombre es requerido</div>
+  </div>
+  <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)" class="alert alert-danger">
+    <div *ngIf="passwordControl.hasError('required')">El password es requerido</div>
+    <div *ngIf="passwordControl.hasError('minlength')">>El password debe ser de 10 o más caracteres</div>
+  </div>
+
+  <input class="btn btn-primary" type="submit" value="Log In" [disabled]="usuarioRegistradoForm.invalid" (click)="loguear()">
+</form>
