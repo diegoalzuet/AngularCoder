@@ -1,0 +1,8 @@
+<!-- <p>persona-list works!</p>
+<app-persona-item></app-persona-item> -->
+
+{{personas | json}}
+
+
+<app-persona-item [persona]='persona' *ngFor="let persona of personas" (click)="clickPersona(persona)" [class.selected]="isSelected(persona)">
+</app-persona-item>
