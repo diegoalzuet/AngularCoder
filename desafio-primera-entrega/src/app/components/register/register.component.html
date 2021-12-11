@@ -43,7 +43,7 @@
         </label>
       </div>
       <div>
-        <button type="submit" class="btn btn-lg btn-primary" [disabled]="loginForm.invalid">Register</button>
+        <button type="submit" class="btn btn-lg btn-primary" (click)="register()" [disabled]="loginForm.invalid">Register</button>
       </div>
     </fieldset>
   </form>

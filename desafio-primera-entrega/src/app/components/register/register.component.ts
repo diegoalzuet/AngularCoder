@@ -24,5 +24,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  register(){
+
+    (this.passwordControl1.value===this.passwordControl2.value)? console.log('REGISTRO COMPLETO'):console.log('Las contraseñas no coinciden');
+    console.log(this.passwordControl1.value);
+    console.log(this.passwordControl2.value);
+  }
 
 }
