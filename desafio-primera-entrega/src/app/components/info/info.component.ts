@@ -1,5 +1,7 @@
+import { MovieService } from './../../services/movie.service';
 import { Movie } from './../../models/movie.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info',
@@ -8,13 +10,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
 
-  @Input() movie: Movie|any;
-  @Input() show: boolean=false;
+  movie: Movie |any;
 
-  constructor() { }
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private moviesService: MovieService
+  ) { }
 
   ngOnInit(): void {
+    this.moviesService.getDetail(this.activateRoute.snapshot.params['id'])
+      .subscribe(movie => {
+        this.movie = movie
+      });
   }
-
-
 }

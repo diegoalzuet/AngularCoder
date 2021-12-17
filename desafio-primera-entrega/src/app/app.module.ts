@@ -9,6 +9,7 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { InfoComponent } from './components/info/info.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     MoviesComponent,
     InfoComponent,
-    CartComponent
+    CartComponent,
+    MenuComponent
 
   ],
   imports: [
