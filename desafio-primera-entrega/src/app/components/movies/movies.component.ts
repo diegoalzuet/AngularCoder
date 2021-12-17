@@ -19,7 +19,6 @@ export class MoviesComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private cartService: CartService,
     private router: Router
   ) { }
 
