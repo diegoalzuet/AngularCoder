@@ -1,5 +1,5 @@
 import { User } from './../../models/user.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
 
   usuarioRegistrado: User = {
     user: 'diego@gmail.com',
@@ -23,8 +23,15 @@ export class LoginComponent implements OnInit {
   passwordControl = this.loginForm.controls['password'];
 
   constructor() { }
+  ngAfterViewInit(): void {
+    console.log('LOGIN - AFTER VIEW INIT');
+  }
+  ngOnDestroy(): void {
+    console.log('LOGIN - ON DESTROY')
+  }
 
   ngOnInit(): void {
+    console.log('LOGIN - ON INIT')
   }
 
   loguear() {

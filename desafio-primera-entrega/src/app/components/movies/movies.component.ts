@@ -1,15 +1,15 @@
 import { Router} from '@angular/router';
-import { CartService } from './../../services/cart.service';
 import { MovieService } from './../../services/movie.service';
 import { Movie } from './../../models/movie.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit,AfterViewInit,OnDestroy,OnChanges {
 
   movies: Movie[]=[];
   movieInfo: Movie|any;
@@ -17,13 +17,28 @@ export class MoviesComponent implements OnInit {
   show : boolean=false;
   showCart: boolean = false;
 
+  private subscription: Subscription | undefined;
+
   constructor(
     private movieService: MovieService,
     private router: Router
-  ) { }
+  ) {
+    console.log('MOVIES - CONSTRUCTOR')
+   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('MOVIES - ON CHANGES',changes)
+  }
+  ngAfterViewInit(): void {
+    console.log('MOVIES - AFTER VIEW INIT');
+  }
+  ngOnDestroy(): void {
+    console.log('MOVIES - ON DESTROY');
+    this.subscription?.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.movieService.getList().subscribe(movies=> this.movies = movies);
+    console.log('MOVIES - ON INIT')
+    this.subscription = this.movieService.getList().subscribe(movies=> this.movies = movies);
   }
   showDetail(id:string){
     this.router.navigate(['peliculas',id]);

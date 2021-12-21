@@ -1,12 +1,12 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit,AfterViewInit,OnDestroy {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
@@ -20,9 +20,18 @@ export class RegisterComponent implements OnInit {
   passwordControl2 = this.loginForm.controls['password2'];
   checkControl = this.loginForm.controls['check'];
 
-  constructor() { }
+  constructor() {
+    console.log('REGISTER - CONSTRUCTOR');
+  }
+  ngAfterViewInit(): void {
+    console.log('REGISTER - AFTER VIEW INIT');
+  }
+  ngOnDestroy(): void {
+    console.log('REGISTER - ON DESTROY');
+  }
 
   ngOnInit(): void {
+    console.log('REGISTER - ON INIT');
   }
   register(){
 
