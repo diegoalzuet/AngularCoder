@@ -54,7 +54,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
   }
   addToCart(id: string) {
 
-    this.cartService.add(id)
+    this.subscription = this.cartService.add(id)
       .subscribe(movie => {
         movie != null ? this.cart.push(movie) : console.log('no se agrego');
         localStorage['carrito'] = JSON.stringify(this.cart);
