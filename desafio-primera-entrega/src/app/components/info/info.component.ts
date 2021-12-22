@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { MovieService } from './../../services/movie.service';
 import { Movie } from './../../models/movie.model';
 import { Component, Input, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class InfoComponent implements OnInit,AfterViewInit,OnDestroy {
 
   movie: Movie |any;
+  private subscription : Subscription | undefined;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -21,11 +23,12 @@ export class InfoComponent implements OnInit,AfterViewInit,OnDestroy {
   }
   ngOnDestroy(): void {
     console.log('MOVIE DETAIL - ON DESTROY')
+    this.subscription?.unsubscribe();
   }
 
   ngOnInit(): void {
     console.log('MOVIE DETAIL - ON INIT')
-    this.moviesService.getDetail(this.activateRoute.snapshot.params['id'])
+    this.subscription = this.moviesService.getDetail(this.activateRoute.snapshot.params['id'])
       .subscribe(movie => {
         this.movie = movie
       });

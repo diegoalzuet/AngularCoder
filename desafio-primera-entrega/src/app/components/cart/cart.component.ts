@@ -1,5 +1,4 @@
 import { CartService } from './../../services/cart.service';
-import { ActivatedRoute } from '@angular/router';
 import { Movie } from './../../models/movie.model';
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
@@ -11,10 +10,10 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   cart: Movie[] | any = [];
-
-  constructor(private activatedRoute: ActivatedRoute,
-    private cartService: CartService) {
-    console.log(localStorage['carrito'])
+  constructor(
+    private cartService: CartService
+  ) {
+    console.log('CARRITO - CONSTRUCTOR');
     if (localStorage['carrito'])
       this.cart = JSON.parse(localStorage['carrito'])
   }
@@ -27,17 +26,11 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('CARRITO - ON INIT')
-    this.cartService.add(this.activatedRoute.snapshot.params['id'])
-      .subscribe(movie => {
-        if (movie != null) {
-          this.cart.push(movie);
-          localStorage['carrito'] = JSON.stringify(this.cart);
-        }
-      });
   }
 
   vaciarCarrito() {
     this.cartService.vaciarCarrito();
+    location.reload();
   }
 
 }
