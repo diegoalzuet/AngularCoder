@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { User } from './../../models/user.model';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,10 +10,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
 
-  usuarioRegistrado: User = {
-    user: 'diego@gmail.com',
-    password: '0123456789'
-  }
+  // usuarioRegistrado: User = {
+  //   user: 'diego@gmail.com',
+  //   password: '0123456789'
+  // }
 
   loginForm = new FormGroup({
     user: new FormControl('', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
   userControl = this.loginForm.controls['user'];
   passwordControl = this.loginForm.controls['password'];
 
-  constructor() { }
+  constructor(
+    private loginService : LoginService
+  ) { }
   ngAfterViewInit(): void {
     console.log('LOGIN - AFTER VIEW INIT');
   }
@@ -35,11 +38,14 @@ export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   loguear() {
-
-    if (this.loginForm.controls['user'].value == this.usuarioRegistrado.user && this.loginForm.controls['password'].value == this.usuarioRegistrado.password)
-      console.log("Bienvenido. Login exitoso");
+    const user = this.loginForm.controls['user'].value;
+    const password= this.loginForm.controls['password'].value;
+    if(this.loginService.validateUser(user,password)){
+      alert('Bienvenido. Login valido');
+      this.loginForm.reset();
+    }
     else
-      console.log('Error en las credenciales')
+    alert('Error en las credenciales');
   }
 
 }
