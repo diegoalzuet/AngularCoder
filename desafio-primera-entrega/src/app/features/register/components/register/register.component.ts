@@ -1,15 +1,19 @@
+import { User } from 'src/app/models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit,AfterViewInit,OnDestroy {
+export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private registeredUsers: User[] = [];
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    email: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$")]),
     password1: new FormControl('', [Validators.required, Validators.minLength(10)]),
     password2: new FormControl('', [Validators.required, Validators.minLength(10)]),
     check: new FormControl(false, [Validators.requiredTrue])
@@ -20,7 +24,9 @@ export class RegisterComponent implements OnInit,AfterViewInit,OnDestroy {
   passwordControl2 = this.loginForm.controls['password2'];
   checkControl = this.loginForm.controls['check'];
 
-  constructor() {
+  constructor(
+    private registerService: RegisterService
+  ) {
     console.log('REGISTER - CONSTRUCTOR');
   }
   ngAfterViewInit(): void {
@@ -33,11 +39,16 @@ export class RegisterComponent implements OnInit,AfterViewInit,OnDestroy {
   ngOnInit(): void {
     console.log('REGISTER - ON INIT');
   }
-  register(){
+  register() {
 
-    (this.passwordControl1.value===this.passwordControl2.value)? console.log('REGISTRO COMPLETO'):console.log('Las contraseñas no coinciden');
-    console.log(this.passwordControl1.value);
-    console.log(this.passwordControl2.value);
+    if (this.passwordControl1.value === this.passwordControl2.value) {
+      this.registerService.registerUser({ user: this.userControl.value, password: this.passwordControl1.value }).subscribe(() => console.log('Creado'))
+      alert('Registro Exitoso. Bienvenido');
+      this.loginForm.reset();
+    }
+    else
+      alert('Las contraseñas no coinciden')
+
   }
 
 }
