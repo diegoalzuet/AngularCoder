@@ -1,8 +1,8 @@
 import { Subscription } from 'rxjs';
 import { MovieService } from './../../services/movie.service';
-import { Movie } from './../../models/movie.model';
 import { Component, Input, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Movie } from 'src/app/models/movie.model';
 
 @Component({
   selector: 'app-info',

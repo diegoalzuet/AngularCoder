@@ -4,12 +4,11 @@ import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input'
+import { MovieService } from '../features/movies/services/movie.service';
 
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     MatCardModule,
@@ -23,6 +22,9 @@ import { MatInputModule} from '@angular/material/input'
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule
+  ],
+  providers:[
+    MovieService
   ]
 })
 export class MaterialModule { }

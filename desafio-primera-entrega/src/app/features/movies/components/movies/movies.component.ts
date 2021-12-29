@@ -1,9 +1,10 @@
-import { CartService } from './../../services/cart.service';
+import { CartService } from '../../../../services/cart.service';
 import { Router } from '@angular/router';
-import { MovieService } from './../../services/movie.service';
-import { Movie } from './../../models/movie.model';
+
+import { Movie } from '../../../../models/movie.model';
 import { Component, Input, OnInit, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movies',
