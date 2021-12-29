@@ -1,3 +1,4 @@
+import { MaterialModule } from './material/material.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,7 +11,8 @@ import { InfoComponent } from './components/info/info.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -21,13 +23,14 @@ import { HttpClientModule} from '@angular/common/http'
     InfoComponent,
     CartComponent,
     MenuComponent
-
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
