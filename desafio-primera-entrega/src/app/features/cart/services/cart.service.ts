@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
-import { Movie } from './../models/movie.model';
 import { Injectable } from '@angular/core';
-import { moviesMock } from '../features/movies/services/movies.mock';
+import { Movie } from 'src/app/models/movie.model';
+import { moviesMock } from '../../movies/services/movies.mock';
 
 @Injectable({
   providedIn: 'root'

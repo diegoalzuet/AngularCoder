@@ -1,6 +1,6 @@
-import { CartComponent } from './components/cart/cart.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './features/cart/components/cart/cart.component';
+import { LoginComponent } from './features/login/components/login/login.component';
+import { RegisterComponent } from './features/register/components/register/register.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -23,11 +23,13 @@ const routes: Routes = [
   },
   {
     path:'login',
-    component: LoginComponent
+    loadChildren: ()=> import('./features/login/login.module').then(m => m.LoginModule)
+    // component: LoginComponent
   },
   {
     path:'register',
-    component: RegisterComponent
+    loadChildren: ()=> import('./features/register/register.module').then(m=>m.RegisterModule)
+    // component: RegisterComponent
   },
   // {
   //   path: 'info',
@@ -35,7 +37,8 @@ const routes: Routes = [
   // },
   {
     path:'carrito',
-    component: CartComponent
+    loadChildren: ()=> import('./features/cart/cart.module').then(m => m.CartModule)
+    // component: CartComponent
   },
   {
     path:'',

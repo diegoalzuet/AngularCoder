@@ -1,6 +1,6 @@
-import { CartService } from './../../services/cart.service';
-import { Movie } from './../../models/movie.model';
+import { Movie } from '../../../../models/movie.model';
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',
