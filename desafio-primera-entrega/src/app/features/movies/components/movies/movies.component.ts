@@ -15,10 +15,6 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
 
   movies: Movie[] = [];
   cart: Movie[] = [];
-  // movieInfo: Movie | any;
-  // movieToCart: Movie[] | any = [];
-  // show: boolean = false;
-  // showCart: boolean = false;
 
   private subscription: Subscription | undefined;
 
