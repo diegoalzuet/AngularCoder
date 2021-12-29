@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-
 import { Movie } from '../../../../models/movie.model';
 import { Component, Input, OnInit, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';

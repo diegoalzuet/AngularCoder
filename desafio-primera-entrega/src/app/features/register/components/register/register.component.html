@@ -1,4 +1,4 @@
-
+<!--
 <div class="container">
 
   <form [formGroup]="loginForm" role="form">
@@ -46,4 +46,51 @@
       </div>
     </fieldset>
   </form>
-</div>
+</div> -->
+
+<mat-card>
+  <mat-card-title>Sign Up</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="loginForm" role="form">
+      <fieldset>
+
+        <mat-form-field>
+          <input type="email" matInput formControlName="email" placeholder="Email Address / Username">
+        </mat-form-field>
+
+
+        <div *ngIf="userControl.invalid && (userControl.dirty || userControl.touched)" class="alert alert-danger">
+          <div *ngIf="userControl.hasError('required')">El nombre es requerido</div>
+          <div *ngIf="userControl.hasError('pattern')">El formato del mail es invalido</div>
+        </div>
+
+        <mat-form-field>
+          <input type="password" matInput formControlName="password1" placeholder="Password">
+        </mat-form-field>
+
+
+        <div *ngIf="passwordControl1.invalid && (passwordControl1.dirty || passwordControl1.touched)"
+          class="alert alert-danger">
+          <div *ngIf="passwordControl1.hasError('required')">El password es requerido</div>
+          <div *ngIf="passwordControl1.hasError('minlength')">>El password debe ser de 10 o más caracteres</div>
+        </div>
+
+        <mat-form-field>
+          <input type="password" matInput formControlName="password2" placeholder="Confirm your Password">
+        </mat-form-field>
+
+        <div *ngIf="passwordControl2.invalid && (passwordControl2.dirty || passwordControl2.touched)"
+          class="alert alert-danger">
+          <div *ngIf="passwordControl2.hasError('required')">El password es requerido</div>
+          <div *ngIf="passwordControl2.hasError('minlength')">>El password debe ser de 10 o más caracteres</div>
+        </div>
+
+        <mat-checkbox formControlName="check" class="example-margin">
+          By Clicking register you're agree to our policy & terms</mat-checkbox>
+        <div class="button">
+          <button mat-raised-button color="warn"  (click)="register()" [disabled]="loginForm.invalid">Register</button>
+        </div>
+      </fieldset>
+    </form>
+  </mat-card-content>
+</mat-card>
