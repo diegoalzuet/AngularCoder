@@ -1,4 +1,4 @@
-import { User } from '../../../../models/user.model';import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 
@@ -8,11 +8,6 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit,AfterViewInit,OnDestroy {
-
-  // usuarioRegistrado: User = {
-  //   user: 'diego@gmail.com',
-  //   password: '0123456789'
-  // }
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required,Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")]),
