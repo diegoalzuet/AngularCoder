@@ -42,13 +42,17 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   register() {
 
     if (this.passwordControl1.value === this.passwordControl2.value) {
-      this.registerService.registerUser({ user: this.userControl.value, password: this.passwordControl1.value }).subscribe(() => console.log('Creado'))
-      alert('Registro Exitoso. Bienvenido');
-      this.loginForm.reset();
+      const req = this.registerService.registerUser({ user: this.userControl.value, password: this.passwordControl1.value });
+      if (req != null)
+        req.subscribe((data) => {
+          alert('Registro Exitoso. Bienvenido');
+          location.reload();
+        })
+      else
+        alert('El correo ingresado ya se encuentra registrado');
     }
     else
       alert('Las contraseñas no coinciden')
-
   }
 
 }

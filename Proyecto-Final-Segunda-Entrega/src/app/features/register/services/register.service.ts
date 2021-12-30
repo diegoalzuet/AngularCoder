@@ -17,15 +17,16 @@ export class RegisterService {
   ) {
     this.getRegisteredUsers().subscribe(
       users => this.registeredUsers = users);
-
   }
 
   getRegisteredUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.url);
   }
 
-  registerUser(user:User){
-    return this.httpClient.post<User>(this.url,user);
+  registerUser(user: User) {
+    if (!this.registeredUsers.find(u => u.user === user.user))
+      return this.httpClient.post<User>(this.url, user);
+    else
+      return null;
   }
-
 }
